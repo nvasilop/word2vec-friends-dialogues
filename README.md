@@ -70,8 +70,8 @@ Similarity scores also reflected known relationships in the show:
 
 | Word Pair | Cosine Similarity |
 |---|---|
-| *ross* – *rachel* | higher |
-| *monica* – *chandler* | higher |
+| *ross* – *rachel* | 0.63 |
+| *monica* – *chandler* | 0.57 |
 
 The `doesnt_match` queries returned expected outliers:
 - `['ross', 'rachel', 'joey', 'milk']` → **milk** (not a character name)
