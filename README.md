@@ -44,7 +44,7 @@ After training, the models were explored using:
 The corpus used in this project is a **Friends dialogue dataset** sourced from **Kaggle**.
 
 This repository does **not** include the dataset file itself.  
-To run the notebook, download the dataset from Kaggle and place the text file locally before execution.
+To run the notebook, download the dataset from Kaggle and upload the text file when prompted in Google Colab.
 
 > Note: The notebook keeps the original workflow used in the assignment, including the way the dataset is loaded.
 
@@ -97,22 +97,11 @@ The dialogue-based nature of the corpus influences results in a notable way: bec
 
 ## How to Run
 
-### Option 1: Run in Google Colab
+1. Open the notebook in Google Colab.
+2. Install the required packages if needed:
 
-1. Open the notebook in Colab.
-2. Upload the dataset file when prompted.
-3. Run the cells in order.
-
-### Option 2: Run locally
-
-1. Create and activate a virtual environment.
-2. Install the dependencies:
-
-```
+```bash
 pip install -r requirements.txt
-```
-
-3. Open the notebook with Jupyter or run the Python script.
 
 ## Skills Demonstrated
 
