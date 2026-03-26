@@ -44,8 +44,6 @@ The corpus used in this project is a **Friends dialogue dataset** sourced from *
 This repository does **not** include the dataset file itself.  
 To run the notebook, download the dataset from Kaggle and place the text file locally before execution.
 
-> Note: The notebook keeps the original workflow used in the assignment, including the way the dataset is loaded.
-
 ## Preprocessing
 
 The corpus was preprocessed using standard text-cleaning steps:
