@@ -48,23 +48,34 @@ To run the notebook, download the dataset from Kaggle and place the text file lo
 
 The corpus was preprocessed using standard text-cleaning steps:
 
-- sentence tokenization
-- lowercasing
-- tokenization into words
-- stopword removal
+- sentence tokenization via sent_tokenize
+- lowercasing and word tokenization via simple_preprocess
+- stopword removal (English stopwords via NLTK)
 - filtering of punctuation and non-alphabetic symbols
 
 The result is a cleaned list of tokenized sentences used as input for Word2Vec training.
 
 ## Main Findings
+CBOW (Model 1) — broad character associations
+With window=10 and vector_size=100, CBOW captured wide co-occurrence patterns across sentences.
+The nearest neighbors of words like rachel were predominantly other main characters (ross, monica, joey, chandler, phoebe), reflecting the model's tendency to group words that appear in similar narrative contexts rather than similar local contexts.
+Similarity scores also reflected known relationships in the show:
+Word PairCosine Similarityross – rachelhighermonica – chandlerhigher
+The doesnt_match queries returned expected outliers:
 
-The experiments show that parameter choices affect the kinds of semantic relationships captured by the embeddings.
+['ross', 'rachel', 'joey', 'milk'] → milk (not a character name)
+['joey', 'phoebe', 'chandler', 'hair'] → hair (not a character name)
 
-- The **CBOW** model produced broader and more general associations between words and character names.
-- The **Skip-gram** model captured more local and context-sensitive relationships, especially in conversational patterns.
-- The quality of some semantic relations was influenced by the size and nature of the dialogue corpus.
+Skip-gram (Model 2) — local conversational context
+With window=5 and vector_size=200, Skip-gram shifted toward local, context-sensitive patterns.
+Instead of mainly returning character names, the nearest neighbors of the same words included terms related to emotions, conversational states, and speaking style — reflecting the model's focus on what words appear close together in dialogue rather than broadly across the corpus.
+This contrast is a direct result of the architecture difference:
 
-Overall, the project demonstrates how Word2Vec can learn meaningful word associations even from a relatively focused conversational dataset.
+CBOW predicts a word from its surrounding context → learns what words share similar contexts
+Skip-gram predicts context from a word → learns fine-grained local usage patterns
+
+Effect of corpus domain
+The dialogue-based nature of the corpus influences results in a notable way: because Friends dialogue is dominated by character names and conversational phrases, the embeddings reflect that distribution. Some semantic relations that would appear in a larger general-purpose corpus (e.g. standard semantic analogies) are harder to capture here. This is expected and instructive — it illustrates how corpus domain shapes what a model can and cannot learn.
 
 ## Files
 
@@ -99,4 +110,5 @@ pip install -r requirements.txt
 ## Notes
 
 This project is intended as a **learning and portfolio project** in Applied NLP / Computational Linguistics.  
-It focuses on experimentation and interpretation rather than production deployment.
+It focuses on experimentation and interpretation rather than production deployment. 
+A natural next step would be adding a t-SNE or UMAP visualization of the learned embeddings to make the semantic clusters visible. This is planned as a future addition.
