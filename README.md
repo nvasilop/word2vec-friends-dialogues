@@ -71,7 +71,6 @@ Overall, the project demonstrates how Word2Vec can learn meaningful word associa
 ## Files
 
 - `Word2Vec_Friends.ipynb` — main notebook with preprocessing, training, experiments, and conclusions
-- `word2vec_friends.py` — Python version of the notebook
 - `requirements.txt` — required Python packages
 
 ## How to Run
