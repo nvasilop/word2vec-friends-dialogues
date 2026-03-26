@@ -100,7 +100,7 @@ The dialogue-based nature of the corpus influences results in a notable way: bec
 1. Open the notebook in Google Colab.
 2. Install the required packages if needed:
 
-```bash
+bash
 pip install -r requirements.txt
 
 ## Skills Demonstrated
