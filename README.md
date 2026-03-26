@@ -40,7 +40,6 @@ After training, the models were explored using:
 * **analogy-style queries** — e.g. `most_similar(positive=['rachel', 'monica'], negative=['joey'])`
 
 ## Dataset
-
 The corpus used in this project is a **Friends dialogue dataset** sourced from **Kaggle**.
 
 This repository does **not** include the dataset file itself.  
@@ -63,9 +62,8 @@ The result is a cleaned list of tokenized sentences used as input for Word2Vec t
 
 ### CBOW (Model 1) — broad character associations
 
-With `window=10` and `vector_size=100`, CBOW captured **wide co-occurrence patterns** across sentences.  
-The nearest neighbors of words like *rachel* were predominantly other main characters (*ross*, *monica*, *joey*, *chandler*, *phoebe*), reflecting the model's tendency to group words that appear in similar narrative contexts rather than similar local contexts.
-
+With window=10 and vector_size=100, CBOW captured wide co-occurrence patterns across sentences.
+The nearest neighbors of words like rachel were predominantly other main characters (chandler, phoebe, ross, monica), reflecting the model's tendency to group words that appear in similar narrative contexts rather than similar local contexts.
 Similarity scores also reflected known relationships in the show:
 
 | Word Pair | Cosine Similarity |
@@ -79,8 +77,9 @@ The `doesnt_match` queries returned expected outliers:
 
 ### Skip-gram (Model 2) — local conversational context
 
-With `window=5` and `vector_size=200`, Skip-gram shifted toward **local, context-sensitive patterns**.  
-Instead of mainly returning character names, the nearest neighbors of the same words included terms related to emotions, conversational states, and speaking style — reflecting the model's focus on what words appear *close together* in dialogue rather than broadly across the corpus.
+With `window=5` and `vector_size=200`, Skip-gram shifted toward local, context-sensitive patterns.
+Instead of mainly returning character names, the nearest neighbors of the same words included terms related to emotions, conversational states, and speaking style (e.g. dejected, excitedly, happily, panicked, relief) — reflecting the model's focus on what words appear close together in dialogue rather than broadly across the corpus.
+This shift is also visible in the similarity scores: the monica–chandler score increased from 0.57 to 0.63, matching ross–rachel, which suggests the Skip-gram model picked up on the frequent local co-occurrence of Monica and Chandler in dialogue exchanges.
 
 This contrast is a direct result of the architecture difference:
 - **CBOW** predicts a word from its surrounding context → learns what words share similar contexts
